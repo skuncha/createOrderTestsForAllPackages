@@ -178,6 +178,12 @@ public class SalesforceGlueAccountPage  extends PageObject {
     public void accountCreation(){
     		waitFor(2).seconds();
     		accounts.click();
+    		try {
+	    		WebDriverWait wait1 = new WebDriverWait(getDriver(), 3);
+	    		if(wait1.until(ExpectedConditions.alertIsPresent())!=null)
+	    	    getDriver().switchTo().alert().accept();
+	    	 	}
+	    	 catch (Exception x)  { }
     		waitFor(6).seconds();
 			newButton().click();
 			waitFor(5).seconds();
@@ -273,7 +279,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 															synctimeforSOPID = synctimeforSOPID + 25;
 														}
 													financeID = id;
-													System.out.print("***** " +rowNum + ". " + "A/C Name : "+arraylist.get(i) +  " +  SOPID : " +financeID + " + ");
+													System.out.print("      " +rowNum + ". " + "A/C Name : "+arraylist.get(i) +  " +  SOPID : " +financeID + " + ");
 													getDriver().navigate().back();
 													waitFor(8).seconds();
 													newRelationship.click(); 
@@ -348,7 +354,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 													}
 										 financeID = id;
 										 ref =CCIMailCustomerID().getText();
-										System.out.print("***** " +rowNum + ". " +"A/C Name : "+arraylist.get(i) + " +  A/C ID : " +ref + " +  SOPID : " +SOPID().getText() + " + ");
+										System.out.print("      " +rowNum + ". " +"A/C Name : "+arraylist.get(i) + " +  A/C ID : " +ref + " +  SOPID : " +SOPID().getText() + " + ");
 										getDriver().navigate().back();
 									}
 									else {
@@ -484,7 +490,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 									 waitFor(1).seconds();
 								 }
 								 
-								 element.findElement(By.xpath("//tbody/tr[6]/td[7]")).click(); /**************** Date Field*****************/
+								 element.findElement(By.xpath("//tbody/tr[5]/td[5]")).click(); /**************** Date Field*****************/
 						    	 waitFor(5).seconds(); 
 						    	
 								 /***************** Price Details **************************/
@@ -547,16 +553,19 @@ public class SalesforceGlueAccountPage  extends PageObject {
 						    	 }
 /************************************ Accept Order *************************************************/	
 									    	 acceptOrder().click();
-									    	 if(str.equalsIgnoreCase("Private Advertiser") || str.equalsIgnoreCase("Direct Advertiser")|| str.equalsIgnoreCase("Brand")) {
-									    	 waitFor(3).seconds();
-									    	 WebElement prepaymentwindow1 = getDriver().switchTo().activeElement();
-									    	 waitFor(1).seconds();
-									    	 prepaymentwindow1.findElement(By.xpath("//input[@value='Prepay']")).click();
-									    	 waitFor(3).seconds();
-									    	 WebElement prepaymentwindow2 = getDriver().switchTo().activeElement();
-									    	 waitFor(1).seconds();
-									    	 prepaymentwindow2.findElement(By.xpath("//input[@value='OK']")).click();
-									    	 }
+									    	 try 
+									    	 {
+										    	 if(str.equalsIgnoreCase("Private Advertiser") || str.equalsIgnoreCase("Direct Advertiser")|| str.equalsIgnoreCase("Brand")) {
+										    	 waitFor(3).seconds();
+										    	 WebElement prepaymentwindow1 = getDriver().switchTo().activeElement();
+										    	 waitFor(1).seconds();
+										    	 prepaymentwindow1.findElement(By.xpath("//input[@value='Prepay']")).click();
+										    	 waitFor(3).seconds();
+										    	 WebElement prepaymentwindow2 = getDriver().switchTo().activeElement();
+										    	 waitFor(1).seconds();
+										    	 prepaymentwindow2.findElement(By.xpath("//input[@value='OK']")).click();
+										    	 }
+									    	 }catch (Exception NoPopUp)	 {}
 									    	 waitFor(8).seconds();
 									    	 getDriver().switchTo().defaultContent();
 /************************************************************************************************/						
@@ -573,11 +582,11 @@ public class SalesforceGlueAccountPage  extends PageObject {
 				    	 				    			System.out.print("     ORDER IS SYNCED BACK TO GLUE WITH IN 30 SECONDS ");
 				    	 				    		}
 				    	 				    		}catch (Exception e) { System.out
-															.print(" *** ORDER DIDN'T SYNC BACK TO GLUE WITH IN 30 SECONDS"); }
-				    	 				    		System.out.println("\n*****     SYNC WAIT TIME FOR SOPID IS  : "+synctimeforSOPID + " SECONDS");
+															.print("       ORDER DIDN'T SYNC BACK TO GLUE WITH IN 30 SECONDS"); }
+				    	 				    		System.out.println("\n         SYNC WAIT TIME FOR SOPID IS  : "+synctimeforSOPID + " SECONDS");
 				    	 				    		synctimeforSOPID =10;
 				    	 				    		waitFor(2).seconds();
-				    	 				    		
+				    	 				    		accountCreation();
 				    	 				    	}
 /**********************************************************************************************/	
 			
@@ -585,16 +594,11 @@ public class SalesforceGlueAccountPage  extends PageObject {
 			} catch (Exception e)
 				{
 					Thucydides.takeScreenshot();
-					System.out.println("       " +rowNum + " ---> " + "Sorry! either DATA/Latency issue please check test report for details" );
+					i++;
+					System.out.println("       " +rowNum + " ---> " + "Sorry! either DATA/Latency issue, please check test report for details" );
 					waitFor(2).seconds();
-					try {
-			    		WebDriverWait wait1 = new WebDriverWait(getDriver(), 3);
-			    		if(wait1.until(ExpectedConditions.alertIsPresent())!=null)
-			    	    getDriver().switchTo().alert().accept();
-			    	 	}
-			    	 catch (Exception x)  { }
+					accountCreation();
 				}
-				accountCreation();
 	} 
 		}
 	}
