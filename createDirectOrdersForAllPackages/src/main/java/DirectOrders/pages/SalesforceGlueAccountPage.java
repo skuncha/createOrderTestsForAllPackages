@@ -79,6 +79,7 @@ public class SalesforceGlueAccountPage  extends PageObject {
 	private WebElement customerSearchButton;
 	@FindBy(how = How.CSS, using = "input[value=' Save ']")
 	private WebElement saveButton;
+	
 	@FindBy(how = How.PARTIAL_LINK_TEXT, using = "AM-")
 	private WebElement accountMapping;
 	private WebElementFacade customerRef()        { return element(By.xpath("//*[@id='00ND0000005WVcQ_ileinner']"));		}
@@ -338,9 +339,9 @@ public class SalesforceGlueAccountPage  extends PageObject {
 												else 
 													{ 
 														financeAccount.click(); 
+														waitFor(5).seconds();
 													}	
 												
-												waitFor(5).seconds();
 												String id = SOPID().getText();
 												while(id.equals(" ")) 
 												  {
@@ -355,13 +356,15 @@ public class SalesforceGlueAccountPage  extends PageObject {
 										 financeID = id;
 										 ref =CCIMailCustomerID().getText();
 										System.out.print("      " +rowNum + ". " +"A/C Name : "+arraylist.get(i) + " +  A/C ID : " +ref + " +  SOPID : " +SOPID().getText() + " + ");
+										waitFor(2).seconds();
 										getDriver().navigate().back();
 									}
 									else {
 										CCIMailIntegration();
 										accountMapping.click();
-								    	waitFor(5).seconds();
-//								    	ref = customerRef().getText();
+								    	waitFor(3).seconds();
+								    	ref = customerRef().getText();
+								    	waitFor(2).seconds();
 								    	getDriver().navigate().back();
 								    	waitFor(8).seconds();
 									}
