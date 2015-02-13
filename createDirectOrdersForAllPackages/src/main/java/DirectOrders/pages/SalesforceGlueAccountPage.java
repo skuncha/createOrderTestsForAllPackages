@@ -579,10 +579,10 @@ public class SalesforceGlueAccountPage  extends PageObject {
 				    	 				    		if (orderlink().isVisible())
 				    	 				    		{ 
 				    	 				    			clickOn(orderlink());
-				    	 				    			System.out.print("     ORDER IS SYNCED BACK TO GLUE WITH IN 30 SECONDS ");
+				    	 				    			System.out.print("        ORDER IS SYNCED BACK TO GLUE WITH IN 30 SECONDS ");
 				    	 				    		}
 				    	 				    		}catch (Exception e) { System.out
-															.print("       ORDER DIDN'T SYNC BACK TO GLUE WITH IN 30 SECONDS"); }
+															.print("        ORDER DIDN'T SYNC BACK TO GLUE WITH IN 30 SECONDS"); }
 				    	 				    		System.out.println("\n         SYNC WAIT TIME FOR SOPID IS  : "+synctimeforSOPID + " SECONDS");
 				    	 				    		synctimeforSOPID =10;
 				    	 				    		waitFor(2).seconds();
