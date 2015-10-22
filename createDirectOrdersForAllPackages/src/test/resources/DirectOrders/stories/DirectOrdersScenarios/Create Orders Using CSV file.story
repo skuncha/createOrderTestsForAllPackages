@@ -1,6 +1,5 @@
-!-- Objective : As a sales rep i should be able to login to glue and create Billing Agency Account 
-!-- srinivasa.kuncha@mailnewspapers.co.uk.prodmirror *glue1234*
-!-- srinivasa.kuncha@dmgmedia.co.uk.systest   *best1234*
+!-- Objective : As a sales rep I should be able to Create Orders for all new customer types and for all Packages
+!-- srinivasa.kuncha@dmgmedia.co.uk.systest   *glue1234*
 
 Narrative:
 In order to Create Agency Accounts using CSV file
@@ -23,4 +22,4 @@ When Mail user provides input data from CSV [file] and create account
 
 Examples:
 |username												|password	|searchAccountName 	|file											|
-|srinivasa.kuncha@mailnewspapers.co.uk.systest			|glue1234	|xyz123				|src\main\resources\createOrders.csv			|
+|srinivasa.kuncha@mailnewspapers.co.uk.prodmirror		|amma1234	|xyz123				|src\main\resources\createOrders.csv			|
